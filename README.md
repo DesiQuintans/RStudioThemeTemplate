@@ -18,6 +18,13 @@ This is a SASS template for making custom RStudio themes, including editor synta
 - The Terminal pane is a bit of a bother. The styles dedicated to its colours take up 500+ lines, so they're in a separate file that gets `@import`ed. I haven't exposed any of the terminal's colours as variables because it was way too easy to accidentally make it unusable.
 
 
+## Theme preview
+
+These colours weren't chosen to be pleasing, they were chosen to show that nearly everything can be styled in this template.
+
+![](template_preview.png)
+
+
 ## Variable dictionary (things you can edit out-of-the-box)
 
 If anything isn't already here, just add it yourself. 
