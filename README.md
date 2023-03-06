@@ -2,6 +2,12 @@
 
 This is a SASS template for making custom RStudio themes, including editor syntax highlighting. It has the most complete support for syntax highlighting that I've yet seen.
 
+To actually use the theme, install [SASS](sass-lang.com/) and compile the `.sass` file to a `.rstheme` file with
+
+    sass --watch "Template_Dark.sass" "C:\Program Files\RStudio\resources\app\resources\themes\Template_Dark.rstheme"
+    
+And set it as your theme in RStudio. To reflect any new changes, right-click in RStudio and select Reload.
+
 
 ## Features
 
