@@ -1,0 +1,403 @@
+/*! rs-theme-name: Template (Dark) */
+/*! rs-theme-is-dark: TRUE */
+
+/*! https://github.com/DesiQuintans/RStudioThemeTemplate 
+    Go there to get the SASS file. Don't edit the raw CSS! */
+
+// Navigation:
+// Search for RMD:  to find styles relating to RMarkdown
+// Search for R:    to find styles relation to R scripts
+// Search for TRM:  to find styles relation to the Terminal pane
+// Search for PANE: to find styles relating to RStudio panes
+
+
+
+// ------- Imports etc. --------------------------------------------------------
+
+@use "sass:color"
+
+/*! An animation that makes the elements affected by a style more obvious. */
+// Add it to a style with: @include debug 
+@mixin debug
+    background-color: red
+    animation: blinking_bg 1s linear infinite
+
+@keyframes blinking_bg
+    25%
+        background-color: color.adjust(red, $alpha: -1)
+    75%
+        background-color: color.adjust(red, $alpha: -1)
+
+
+
+// ------- Editable variables --------------------------------------------------
+
+// Names ending with '_clr' are 'color:'      properties.
+// Names ending with '_bg'  are 'background:' properties.
+// Names ending with '_bdr' are 'border:'     properties.
+
+// Basic text colours.
+$base_text_clr:  #FAFAFA
+$whitespace_clr: #BDBDBD
+
+$cursor_clr:     #FF80AB
+$editor_bg:      #212121
+$activeline_bg:  #424242
+$activeline_bdr: 1px solid #616161
+$debugline_bg:   #BF360C
+
+// RMarkdown code blocks.
+$codechunk_bg:   #3E2723
+$codechunk_bdr:  1px solid #4E342E
+$codechunk_clr:  #A1887F
+$fold_clr:       #FFEB3B
+
+// Gutter and line numbers.
+$gutter_bg:      #263238
+$gutter_clr:     #455A64
+
+// Active selection (e.g. double-click a variable name)
+// Also marks Find + Replace matches
+$active_selection_bg:   #004D40
+$active_selection_bdr:  #00695C
+
+// Inactive selection (e.g. all other instances of selected variable name)
+$inactive_selection_bg:  #4DB6AC
+$inactive_selection_bdr: 1px solid #80CBC4
+
+$ruler_bdr:    1px dotted #E65100
+$matching_bdr: 1px solid  #FFFF00
+
+// Characters that can't be displayed correctly (e.g. Unicode char in a non-Unicode script).
+$invalid_clr:    #FF9E80
+$invalid_bg:     #DD2C00
+
+// Syntax highlighting and Markdown highlighting
+$comment_clr:    #827717  // R: #Comments.
+$comment_bg:     #DCE775  // R: #Comments
+
+$keyword_clr:    #A7FFEB  // R: Keywords function if else return library source. RMD: <links> and [link text]()
+$function_clr:   #84FFFF  // R: Function names when 'Highlight function calls' is enabled
+$package_clr:    #80D8FF  // R: Package names on left side of ::
+
+$operator_clr:   #F0F4C3  // R: Operators/symbols: + , - %>% ~ > = + ) ( <- ::
+$infix_clr:      #C5E1A5  // R: %in%, %>%
+$comma_clr:      #A5D6A7  // R: Commas in function calls
+
+$constant_clr:   #FFCC80  // R: Constants: TRUE, FALSE, NA.
+$numeric_clr:    #F06292  // R: Numbers. Markdown: **bold text**
+$string_clr:     #BA68C8  // R: Strings. RMD: > blockquotes.
+$var_arg_clr:    #76FF03  // R: Variable names, argument names.
+
+$yamlkey_clr:    #90A4AE  // RMD: YAML key names in RMarkdown, e.g. title:, output:.
+$code_clr:       #FF5252  // RMD: `code blocks` and indented code blocks.
+$bold_clr:       #FF80AB  // RMD: **bold text**
+$italic_clr:     #AA00FF  // RMD: _italic_ *text*
+$heading_clr:    #3949AB  // RMD: #Headings of all levels.
+$heading_bg:     #9FA8DA  // RMD: #Headings of all levels.
+$url_clr:        #EDE7F6  // RMD: ()[URL text in square brackets]
+$blockquote_clr: #4DD0E1  // RMD: > Blockquotes, including indented blockquotes
+
+$help_link_clr:  #76FF03  // PANE: Link text in the Help pane.
+$help_link_bg:   #689F38  // PANE: Background of link text in the Help pane.
+
+// Indent guides
+$indent_guide_bdr: 1px solid #B3E5FC
+
+// These colours are used for both rainbow indentation guides and rainbow brackets.
+$rainbow0: #FC8D62  // #ed90a4
+$rainbow1: #A6D854  // #d3a263
+$rainbow2: #8DA0CB  // #99b657
+$rainbow3: #FFD92F  // #33c192
+$rainbow4: #E78AC3  // #00bdce
+$rainbow5: #66C2A5  // #94a9eb
+$rainbow6: #E5C494  // #dc91db
+
+
+
+// ------- Auto-generated colours --------------------------------------------------------------- //
+
+
+
+
+// ------- Syntax highlighting -------------------------------------------------
+
+.ace_support
+    &.ace_function  // RMD: `code text`, including indented blocks.
+        color: $code_clr
+
+.ace_meta
+    &.ace_tag // RMD: YAML key
+        color: $yamlkey_clr
+        
+.ace_heading  // RMD: Heading text, regardless of level
+    // display: block
+    color: $heading_clr
+    background: $heading_bg
+
+.ace_markup
+    // These styles are not useful because they only style the #characters, and their indentation,
+    // size, etc. can't be changed without disrupting the cursor's visual position.
+    // &.ace_heading
+    //     &.ace_1  // #RMD: #Characters marking a MD heading
+    //     &.ace_2
+    //     &.ace_3
+    //     &.ace_4
+    //     &.ace_5
+    //     &.ace_6
+    &.ace_href  // RMD: [](URL only)
+        color: $url_clr
+
+.ace_constant
+    &.ace_numeric  // R: Integers and floats.
+        color: $numeric_clr
+
+        &.ace_text // RMD: **Bold text**
+            color: $bold_clr !important
+            font-weight: bold
+
+    &.ace_language  // R: TRUE, FALSE, NA, NULL, etc.
+        color: $constant_clr
+
+        &.ace_boolean
+            &.ace_text  // RMD: _Italicised_ *text*
+                color: $italic_clr !important
+                font-style: italic !important
+
+.ace_keyword  // R: else if function return stop. RMD: <URL> or [Link text]()
+    color: $keyword_clr
+
+    &.ace_operator  // R: Operators > :: | : = == ! etc.
+        color: $operator_clr !important
+        
+        &.ace_infix // R: %in% and %>%
+            color: $infix_clr !important
+
+    &.ace_virtual-comment  // R: @export @md @param @return
+        color: $keyword_clr !important
+
+.ace_string  // R: Strings
+    color: $string_clr
+
+    &.ace_blockquote  // RMD: Blockquote only, including indented blockquote
+        color: $blockquote_clr !important
+        font-style: italic
+
+.ace_virtual-comment
+    background: $comment_bg !important
+
+.ace_comment  // R: Comments
+    color: $comment_clr
+    background: $comment_bg
+
+    &.ace_sectionhead  // R: Comments recognised as section headers
+        color: $heading_clr !important
+        background: $heading_bg
+
+.ace_identifier  // R: Variable names and function arguments
+    color: $var_arg_clr
+
+    &.ace_support
+        &.ace_class // R: Package names to the left of ::
+            color: $package_clr !important
+
+        &.ace_function  // R: Function names when highlighting is enabled
+            color: $function_clr !important
+
+.ace_invalid   // PANE: Characters that can't be displayed (e.g. Unicode char in a non-Unicode script).
+    background-color: $invalid_bg
+    color: $invalid_clr
+
+.ace_punctuation.ace_keyword.ace_operator // Commas // R: Commas. Not very useful. Why format commas differently?
+    color: $comma_clr !important
+
+.ace_invisible   // PANE: Whitespace characters (if displaying them is enabled).
+    color: $whitespace_clr
+
+
+
+
+// ------- Other styles --------------------------------------------------------
+
+.ace_editor, .ace_editor_theme .profvis-flamegraph, .ace_editor_theme  // PANE: All panes
+    background: $editor_bg
+    color: $base_text_clr
+
+.ace_cursor  // PANE: Cursor in Editor and Console
+    color: $cursor_clr
+
+.normal-mode .ace_cursor  // PANE: Cursor in Terminal. https://stackoverflow.com/a/73266176/5578429
+    background-color: $cursor_clr
+
+
+.ace_marker-layer .ace_foreign_line  // R: Sandwiched lines of RMD code block only
+    position: absolute
+    z-index: -1
+    background:   $codechunk_bg
+    border-left:  $codechunk_bdr
+    border-right: $codechunk_bdr
+
+// Note that borders only go as far as the block's header text does.
+.ace_support.ace_codebegin  // RMD: First line of YAML or RMD code block 
+    color: $codechunk_clr
+
+.ace_support.ace_codeend  // RMD: Last line of YAML or RMD code block
+    color: $codechunk_clr
+
+
+.ace_marker-layer 
+    .ace_selection  // PANE: Active text selection in the Script pane
+        background: $active_selection_bg
+        border:     $active_selection_bdr
+
+        &.ace_start  // PANE: Styles the first line of selected text
+            box-shadow: 0 0 3px 0px $inactive_selection_bg
+            border-radius: 2px
+        
+    // PANE: Inactive text selection in the Script pane (e.g. when double-clicking a variable
+    // name, your double-clicked word is highlighted with .ace_selection, but all other instances
+    // of that word are highlighted with .ace_selected-word.)
+    .ace_selected-word 
+        background: $inactive_selection_bg
+        border: $inactive_selection_bdr
+    
+    .ace_active-line  // PANE: Highlight for active line in Script pane
+        background: $activeline_bg
+        border: $activeline_bdr
+
+    .ace_active_debug_line  // PANE: Highlight for current line in debug() tool
+          position: absolute
+          z-index: -1
+          background: $debugline_bg
+    
+.ace_gutter  // PANE: Line numbers, background behind them.
+    background: $gutter_bg
+    color: $gutter_clr
+
+.ace_print-margin  // PANE: Line length ruler
+   border-right: $ruler_bdr
+
+.ace_fold  // PANE: Indicator to the right of a folded block
+    background: $fold_clr
+
+.ace_editor_theme a  // PANE: Links in Help panel.
+    background-color: $help_link_bg !important
+    color: $help_link_clr !important
+    text-decoration-line: underline
+
+.ace_marker-layer .ace_bracket  // R: Matching bracket.
+    margin: -1px 0 0 -1px
+    border: $matching_bdr
+    @include debug
+
+
+
+// ------- Indentation and brackets rainbow colouring --------------------------
+
+// Indent guide: "Grey lines"
+.ace_indent-guide 
+    border-left: $indent_guide_bdr
+
+// Indent guide: "Rainbow lines"
+.rstudio_rainbow_indent_guides .ace_line 
+    .ace_indent-guide:nth-child(7n+1)
+        background: linear-gradient(to left, $rainbow0 1px, transparent 1px, transparent)
+    .ace_indent-guide:nth-child(7n+2)
+        background: linear-gradient(to left, $rainbow1 1px, transparent 1px, transparent)
+    .ace_indent-guide:nth-child(7n+3)
+        background: linear-gradient(to left, $rainbow2 1px, transparent 1px, transparent)
+    .ace_indent-guide:nth-child(7n+4)
+        background: linear-gradient(to left, $rainbow3 1px, transparent 1px, transparent)
+    .ace_indent-guide:nth-child(7n+5)
+        background: linear-gradient(to left, $rainbow4 1px, transparent 1px, transparent)
+    .ace_indent-guide:nth-child(7n+6)
+        background: linear-gradient(to left, $rainbow5 1px, transparent 1px, transparent)
+    .ace_indent-guide:nth-child(7n+7)
+        background: linear-gradient(to left, $rainbow6 1px, transparent 1px, transparent)
+
+// Indent guide: Rainbow fill
+.rstudio_rainbow_indent_fills .ace_line 
+    .ace_indent-guide:nth-child(7n+1)
+        background: linear-gradient(to left, $rainbow0 1px, color.adjust($rainbow0, $alpha: -0.4) 1px, color.adjust($rainbow0, $alpha: -0.8) )
+    .ace_indent-guide:nth-child(7n+2)
+        background: linear-gradient(to left, $rainbow1 1px, color.adjust($rainbow1, $alpha: -0.4) 1px, color.adjust($rainbow1, $alpha: -0.8) )
+    .ace_indent-guide:nth-child(7n+3)
+        background: linear-gradient(to left, $rainbow2 1px, color.adjust($rainbow2, $alpha: -0.4) 1px, color.adjust($rainbow2, $alpha: -0.8) )
+    .ace_indent-guide:nth-child(7n+4)
+        background: linear-gradient(to left, $rainbow3 1px, color.adjust($rainbow3, $alpha: -0.4) 1px, color.adjust($rainbow3, $alpha: -0.8) )
+    .ace_indent-guide:nth-child(7n+5)
+        background: linear-gradient(to left, $rainbow4 1px, color.adjust($rainbow4, $alpha: -0.4) 1px, color.adjust($rainbow4, $alpha: -0.8) )
+    .ace_indent-guide:nth-child(7n+6)
+        background: linear-gradient(to left, $rainbow5 1px, color.adjust($rainbow5, $alpha: -0.4) 1px, color.adjust($rainbow5, $alpha: -0.8) )
+    .ace_indent-guide:nth-child(7n+7)
+        background: linear-gradient(to left, $rainbow6 1px, color.adjust($rainbow6, $alpha: -0.4) 1px, color.adjust($rainbow6, $alpha: -0.8) )
+    
+
+// R: Rainbow brackets
+.ace_paren_color_0  
+    color: $rainbow0 !important
+.ace_paren_color_1
+    color: $rainbow1 !important
+.ace_paren_color_2
+    color: $rainbow2 !important
+.ace_paren_color_3
+    color: $rainbow3 !important
+.ace_paren_color_4
+    color: $rainbow4 !important
+.ace_paren_color_5
+    color: $rainbow5 !important
+.ace_paren_color_6
+    color: $rainbow6 !important
+
+
+
+// ------- TRM: Terminal pane --------------------------------------------------
+
+.terminal
+    background-color: $editor_bg
+    color: $base_text_clr
+    font-feature-settings: "liga" 0
+    position: relative
+    user-select: none
+    -ms-user-select: none
+    -webkit-user-select: none
+
+    // Text selected inside the Terminal pane.
+    .xterm-selection div
+        position: absolute
+        background-color: $active_selection_bg
+
+    .xterm-viewport
+        background-color: $editor_bg
+        overflow-y: scroll
+
+.xtermInvertColor
+    color: $editor_bg
+
+.xtermInvertBgColor
+    background-color: $base_text_clr
+
+
+// This file contains all of the terminal-related stuff. It comes to 550 lines.
+
+// There is a 'terminal_dark' for dark themes, and a 'terminal_light' for others.
+// 'terminal_dark' was copied from the Ambience built-in theme.
+// 'terminal_light' was copied from the Textmate (default) theme.
+
+// I use @import so that I can have them at the end of the document.
+@import 'terminal_dark'
+
+
+
+// ------- Draw order of elements --------------------------------------------------------------- //
+
+.ace_layer 
+    z-index: 3
+
+    &.ace_print-margin-layer 
+        z-index: 2
+
+    &.ace_marker-layer 
+        z-index: 1
+    
+
