@@ -105,13 +105,16 @@ $help_link_bg:   #689F38  // PANE: Background of link text in the Help pane.
 $indent_guide_bdr: 1px solid #B3E5FC
 
 // These colours are used for both rainbow indentation guides and rainbow brackets.
-$rainbow0: #FC8D62  // #ed90a4
-$rainbow1: #A6D854  // #d3a263
-$rainbow2: #8DA0CB  // #99b657
-$rainbow3: #FFD92F  // #33c192
-$rainbow4: #E78AC3  // #00bdce
-$rainbow5: #66C2A5  // #94a9eb
-$rainbow6: #E5C494  // #dc91db
+// These are three characters long in the template so that the suggested clearing-out
+// regex of `#.{6}` -> `inherit` doesn't get rid of them. They're used in functions
+// for calculating the rainbow fill gradient and can't be missing or inherit.
+$rainbow0: #FC8
+$rainbow1: #D3A
+$rainbow2: #8DA
+$rainbow3: #33C
+$rainbow4: #E78
+$rainbow5: #94A
+$rainbow6: #DC9
 
 
 
