@@ -39,6 +39,7 @@
 // Basic text colours.
 $base_text_clr:  #FAFAFA
 $whitespace_clr: #BDBDBD
+$err_warn_msg_clr: #52EDEC
 
 $cursor_clr:     #FF80AB
 $editor_bg:      #212121
@@ -150,6 +151,13 @@ $rainbow6: #DC9
     //     &.ace_6
     &.ace_href  // RMD: [](URL only)
         color: $url_clr
+
+.GND-IWGDB3B
+    &.ace_constant
+        &.ace_language  // PANE: Errors, warnings, and messages in console
+            text-decoration: none !important
+            font-style: normal !important
+            color: $err_warn_msg_clr
 
 .ace_constant
     &.ace_numeric  // R: Integers and floats.
